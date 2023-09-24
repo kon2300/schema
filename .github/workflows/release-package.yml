@@ -40,3 +40,37 @@ jobs:
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-package2:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+
+      - name: Set up
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+
+      - id: publishable
+        name: Check Publishable
+        run: |
+          cd schema/test2 &&
+          npx can-npm-publish --verbose &&
+          echo status=0 >> $GITHUB_OUTPUT || echo status=1 >> $GITHUB_OUTPUT
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish
+        if: ${{ steps.publishable.outputs.status == 0 }}
+        run: |
+          cd schema/test2 &&
+          npm i &&
+          npm run build &&
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
