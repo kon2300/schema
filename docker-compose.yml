@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  pkg:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.dev
+    volumes:
+      - .:/pkg
+      - hidden-data:/package/node_modules
+    tty: true
+
+volumes:
+  hidden-data:
