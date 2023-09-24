@@ -1,0 +1,30 @@
+{
+  "name": "@kon2300/test2",
+  "description": "test2のAPIスキーマです",
+  "version": "0.1.0",
+  "author": "",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kon2300/schema.git"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@ts-rest/core": "^3.28.0",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
